@@ -518,20 +518,30 @@
     .impact-sub {
       font-family: 'MCQ Global', sans-serif;
       font-size: 17px; line-height: 1.75; color: #5A5A5A;
-      margin-top: 16px;
+      margin-top: 16px; max-width: 560px;
     }
-    .impact-bullets {
-      list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 28px;
+    .impact-cards-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 16px; margin-top: 40px;
     }
-    .impact-bullets li {
-      font-size: 16px; line-height: 1.6; color: #5A5A5A;
-      padding-left: 18px; position: relative;
+    .impact-card {
+      background: var(--white); border-radius: 10px; padding: 28px 24px;
+      border: 1px solid rgba(0,0,0,0.06);
+      transition: transform 0.3s var(--ease), box-shadow 0.3s, border-color 0.25s;
+      cursor: default;
     }
-    .impact-bullets li::before {
-      content: ''; position: absolute; left: 0; top: 10px;
-      width: 5px; height: 5px; border-radius: 50%; background: var(--blue);
+    .impact-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(12,108,206,0.12);
+      border-color: rgba(12,108,206,0.2);
     }
-    .impact-bullets li strong { color: #0A0A0A; font-weight: 500; }
+    .impact-card-icon {
+      font-size: 28px; line-height: 1; margin-bottom: 16px;
+    }
+    .impact-card-text {
+      font-size: 15px; line-height: 1.55; color: #5A5A5A;
+    }
+    .impact-card-text strong { color: #0A0A0A; font-weight: 500; }
 
     /* ──────────────────────────────────────────────────────────────
        11. LEARNINGS
@@ -604,7 +614,8 @@
       .hero-right { display: none; }
       .two-col, .two-col-equal, .team-behaviour-split, .role-grid, .impact-layout { grid-template-columns: 1fr; gap: 36px; }
       .role-header { grid-row: auto; } .role-body { grid-row: auto; } .role-callout { grid-column: 1; grid-row: auto; }
-      .stats-quad, .quotes-trio, .learnings-trio, .question-trio, .impact-cards-grid { grid-template-columns: 1fr; }
+      .stats-quad, .quotes-trio, .learnings-trio, .question-trio { grid-template-columns: 1fr; }
+      .impact-cards-grid { grid-template-columns: 1fr; }
       #nav-dots { display: none; }
       .sticky { position: static; }
       .chapter-ghost { display: none; }
@@ -981,13 +992,28 @@
       <div class="divider-bar reveal delay-1"></div>
       <h2 class="display-lg reveal delay-2">Impact</h2>
       <p class="impact-sub reveal delay-3">While internal-facing, this work directly enabled higher-quality customer outcomes by removing uncertainty upstream, before it became friction in the experience.</p>
-      <ul class="impact-bullets reveal delay-3">
-        <li>Established a <strong>single source of truth</strong> for Macquarie's mobile app</li>
-        <li><strong>Reduced risk</strong> when evolving core journeys</li>
-        <li><strong>Improved alignment</strong> across design, product, and engineering</li>
-        <li>Enabled <strong>more confident</strong> planning and prioritisation</li>
-        <li>Created a <strong>foundation</strong> for future mobile improvements</li>
-      </ul>
+      <div class="impact-cards-grid">
+        <div class="impact-card reveal delay-1">
+          <div class="impact-card-icon">&#128203;</div>
+          <p class="impact-card-text">Established a <strong>single source of truth</strong> for Macquarie's mobile app</p>
+        </div>
+        <div class="impact-card reveal delay-2">
+          <div class="impact-card-icon">&#128737;</div>
+          <p class="impact-card-text"><strong>Reduced risk</strong> when evolving core journeys</p>
+        </div>
+        <div class="impact-card reveal delay-3">
+          <div class="impact-card-icon">&#128260;</div>
+          <p class="impact-card-text"><strong>Improved alignment</strong> across design, product, and engineering</p>
+        </div>
+        <div class="impact-card reveal delay-4">
+          <div class="impact-card-icon">&#128200;</div>
+          <p class="impact-card-text">Enabled <strong>more confident</strong> planning and prioritisation</p>
+        </div>
+        <div class="impact-card reveal delay-5">
+          <div class="impact-card-icon">&#128736;</div>
+          <p class="impact-card-text">Created a <strong>foundation</strong> for future mobile improvements</p>
+        </div>
+      </div>
     </div>
   </section>
 
