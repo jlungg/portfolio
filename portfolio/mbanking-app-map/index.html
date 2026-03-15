@@ -140,11 +140,12 @@
     }
 
     /* ──────────────────────────────────────────────────────────────
-       1. HERO
+       1. HERO (KYC/BXO-style cover with mockup)
     ────────────────────────────────────────────────────────────── */
     #hero {
       min-height: 100vh; background: var(--black);
-      position: relative; padding: var(--pad) 0;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; position: relative; overflow: hidden;
     }
     .hero-dot-grid {
       position: absolute; inset: 0;
@@ -163,19 +164,17 @@
       background: radial-gradient(circle, rgba(12,108,206,0.05) 0%, transparent 70%);
       bottom: -80px; left: -60px; pointer-events: none;
     }
+    .hero-left {
+      padding: 120px 0 120px max(48px, calc((100vw - var(--max-w)) / 2 + 48px));
+      position: relative; z-index: 2;
+    }
     .hero-kicker {
       font-family: 'Roboto Mono', monospace; font-size: 10px; font-weight: 700;
       letter-spacing: 0.22em; text-transform: uppercase;
       color: var(--text-dim); margin-bottom: 24px;
     }
-    .hero-content {
-      position: relative; z-index: 2;
-      display: flex; flex-direction: column;
-      min-height: calc(100vh - var(--pad) * 2);
-      justify-content: center;
-    }
     .hero-logo { margin-bottom: 64px; }
-    .hero-logo svg { height: 28px; width: auto; }
+    .hero-logo img { height: 28px; width: auto; }
     .hero-title { font-size: clamp(48px, 8.5vw, 110px); color: var(--white); margin-bottom: 28px; text-transform: none; }
     .hero-title .line2 { color: var(--blue); }
     .hero-tagline {
@@ -183,6 +182,18 @@
       letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-dim);
       max-width: 520px;
     }
+    .hero-right {
+      position: relative; height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-mockup {
+      width: 63.75%; max-width: 442px;
+      position: relative; z-index: 2;
+      filter: drop-shadow(0 40px 80px rgba(0,0,0,0.6));
+      animation: hero-float 6s ease-in-out infinite;
+    }
+    @keyframes hero-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
     .hero-gradient-line {
       position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, var(--blue), transparent);
@@ -522,114 +533,6 @@
     }
     .impact-bullets li strong { color: #0A0A0A; font-weight: 500; }
 
-    /* WIREFRAME SCREENS */
-    .screens-canvas {
-      margin-top: 56px; background: #0A0A0A; border-radius: 12px;
-      padding: 48px 24px; position: relative; overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .screens-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 40px; padding: 0 16px;
-    }
-    .screens-title {
-      font-family: 'Roboto Mono', monospace; font-size: 9px; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim);
-    }
-    .screens-count {
-      font-family: 'Roboto Mono', monospace; font-size: 9px; font-weight: 500;
-      letter-spacing: 0.1em; color: var(--blue);
-    }
-    .screens-row {
-      display: flex; align-items: flex-start; justify-content: center;
-      gap: 0; position: relative; overflow-x: auto;
-      padding-bottom: 16px;
-      scrollbar-width: none;
-    }
-    .screens-row::-webkit-scrollbar { display: none; }
-    .screen-group {
-      display: flex; flex-direction: column; align-items: center;
-      flex-shrink: 0; position: relative;
-    }
-    .screen-arrow {
-      display: flex; align-items: center; justify-content: center;
-      width: 48px; flex-shrink: 0; align-self: center;
-      margin-top: -30px;
-    }
-    .screen-arrow svg { overflow: visible; }
-    .screen-arrow .arrow-line {
-      stroke-dasharray: 4 3;
-      animation: arrow-flow 0.8s linear infinite;
-    }
-    @keyframes arrow-flow { to { stroke-dashoffset: -7; } }
-    .phone-frame {
-      width: 140px; height: 260px;
-      background: #111; border-radius: 16px;
-      border: 1.5px solid rgba(255,255,255,0.1);
-      padding: 8px;
-      display: flex; flex-direction: column;
-      position: relative; overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.3s var(--ease), border-color 0.3s, box-shadow 0.3s;
-    }
-    .phone-frame:hover {
-      transform: translateY(-6px) scale(1.03);
-      border-color: var(--blue);
-      box-shadow: 0 16px 48px rgba(12,108,206,0.15);
-    }
-    .phone-frame.active {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 2px rgba(12,108,206,0.3);
-    }
-    .phone-notch {
-      width: 40px; height: 4px; background: #222;
-      border-radius: 2px; margin: 2px auto 6px; flex-shrink: 0;
-    }
-    .phone-screen { flex: 1; display: flex; flex-direction: column; gap: 5px; padding: 4px 6px; }
-    .ph-status {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;
-    }
-    .ph-time { width: 16px; height: 3px; background: rgba(255,255,255,0.3); border-radius: 1px; }
-    .ph-icons { display: flex; gap: 2px; }
-    .ph-icons span { width: 5px; height: 3px; background: rgba(255,255,255,0.2); border-radius: 1px; }
-    .ph-bar { height: 4px; border-radius: 2px; }
-    .ph-bar-w { background: rgba(255,255,255,0.25); }
-    .ph-bar-b { background: rgba(12,108,206,0.5); }
-    .ph-bar-t { background: rgba(12,108,206,0.4); }
-    .ph-card {
-      border-radius: 5px; padding: 6px 7px;
-      display: flex; flex-direction: column; gap: 3px;
-    }
-    .ph-card-dark { background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.06); }
-    .ph-card-blue { background: rgba(12,108,206,0.12); border: 0.5px solid rgba(12,108,206,0.2); }
-    .ph-card-teal { background: rgba(12,108,206,0.1); border: 0.5px solid rgba(12,108,206,0.15); }
-    .ph-row { display: flex; gap: 4px; align-items: center; }
-    .ph-dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; }
-    .ph-dot-b { background: rgba(12,108,206,0.6); }
-    .ph-dot-t { background: rgba(12,108,206,0.5); }
-    .ph-dot-w { background: rgba(255,255,255,0.15); }
-    .ph-circle { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
-    .ph-rect { border-radius: 2px; }
-    .ph-btn {
-      height: 10px; border-radius: 3px; margin-top: auto;
-    }
-    .ph-nav {
-      display: flex; justify-content: space-around; padding: 5px 4px 2px;
-      border-top: 0.5px solid rgba(255,255,255,0.06); margin-top: auto;
-    }
-    .ph-nav-item { width: 8px; height: 8px; border-radius: 2px; background: rgba(255,255,255,0.08); }
-    .ph-nav-item.ph-nav-active { background: rgba(12,108,206,0.5); }
-    .ph-divider { height: 0.5px; background: rgba(255,255,255,0.06); margin: 2px 0; }
-    .screen-label {
-      font-family: 'Roboto Mono', monospace; font-size: 8px; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);
-      margin-top: 14px; text-align: center;
-    }
-    .screen-sublabel {
-      font-family: 'MCQ Global', sans-serif; font-size: 10px;
-      color: rgba(255,255,255,0.25); text-align: center; margin-top: 3px;
-    }
-
     /* ──────────────────────────────────────────────────────────────
        11. LEARNINGS
     ────────────────────────────────────────────────────────────── */
@@ -696,6 +599,9 @@
     @media (max-width: 900px) {
       :root { --pad: 80px; }
       .container { padding: 0 24px; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 100px 24px; }
+      .hero-right { display: none; }
       .two-col, .two-col-equal, .team-behaviour-split, .role-grid, .impact-layout { grid-template-columns: 1fr; gap: 36px; }
       .role-header { grid-row: auto; } .role-body { grid-row: auto; } .role-callout { grid-column: 1; grid-row: auto; }
       .stats-quad, .quotes-trio, .learnings-trio, .question-trio, .impact-cards-grid { grid-template-columns: 1fr; }
@@ -730,17 +636,18 @@
     <div class="hero-dot-grid"></div>
     <div class="hero-glow"></div>
     <div class="hero-glow-teal"></div>
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-logo reveal">
-          <img src="assets/macquarie-logo.svg" alt="Macquarie" style="height:28px;width:auto;">
-        </div>
-        <p class="hero-kicker reveal delay-1">Case Study</p>
-        <h1 class="hero-title display-xl reveal delay-2">
-          mBANKING:<br><span class="line2">APP MAP</span>
-        </h1>
-        <p class="hero-tagline reveal delay-3">Creating clarity at scale to reduce product risk</p>
+    <div class="hero-left">
+      <div class="hero-logo reveal">
+        <img src="assets/macquarie-logo.svg" alt="Macquarie">
       </div>
+      <p class="hero-kicker reveal delay-1">Case Study</p>
+      <h1 class="hero-title display-xl reveal delay-2">
+        mBANKING:<br><span class="line2">APP MAP</span>
+      </h1>
+      <p class="hero-tagline reveal delay-3">Creating clarity at scale to reduce product risk</p>
+    </div>
+    <div class="hero-right">
+      <img src="assets/app-map-hero.png" alt="mBanking app map on computer screen" class="hero-mockup reveal delay-2">
     </div>
     <div class="hero-gradient-line"></div>
   </section>
@@ -1081,267 +988,6 @@
         <li>Enabled <strong>more confident</strong> planning and prioritisation</li>
         <li>Created a <strong>foundation</strong> for future mobile improvements</li>
       </ul>
-
-      <!-- Interactive wireframe screens -->
-      <div class="screens-canvas reveal delay-4" id="screens-canvas">
-        <div class="screens-header">
-          <span class="screens-title">mBanking App Map — Key Screens</span>
-          <span class="screens-count">2,730 screens mapped</span>
-        </div>
-        <div class="screens-row" id="screens-row">
-
-          <!-- 1. HOME -->
-          <div class="screen-group">
-            <div class="phone-frame active" data-screen="home">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-                <div class="ph-status"><span class="ph-time"></span><div class="ph-icons"><span></span><span></span><span></span></div></div>
-                <div class="ph-bar ph-bar-w" style="width:45%;height:5px;margin-bottom:2px"></div>
-                <div class="ph-bar ph-bar-b" style="width:65%;height:3px;opacity:0.5;margin-bottom:6px"></div>
-                <div class="ph-card ph-card-blue" style="padding:8px 7px">
-                  <div class="ph-bar ph-bar-w" style="width:35%;height:3px"></div>
-                  <div class="ph-bar ph-bar-b" style="width:60%;height:6px;margin-top:2px"></div>
-                  <div class="ph-bar ph-bar-w" style="width:80%;height:2px;margin-top:3px;opacity:0.4"></div>
-                </div>
-                <div class="ph-card ph-card-dark" style="margin-top:4px">
-                  <div class="ph-bar ph-bar-w" style="width:40%;height:3px"></div>
-                  <div class="ph-bar ph-bar-b" style="width:55%;height:5px;margin-top:2px"></div>
-                </div>
-                <div class="ph-row" style="margin-top:6px;justify-content:space-between">
-                  <div class="ph-rect ph-card-dark" style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><div class="ph-dot ph-dot-b"></div></div>
-                  <div class="ph-rect ph-card-dark" style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><div class="ph-dot ph-dot-t"></div></div>
-                  <div class="ph-rect ph-card-dark" style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><div class="ph-dot ph-dot-w"></div></div>
-                  <div class="ph-rect ph-card-dark" style="width:26px;height:26px;display:flex;align-items:center;justify-content:center"><div class="ph-dot ph-dot-w"></div></div>
-                </div>
-                <div class="ph-card ph-card-dark" style="margin-top:5px">
-                  <div class="ph-row"><div class="ph-dot ph-dot-w"></div><div class="ph-bar ph-bar-w" style="width:60%;height:2px"></div></div>
-                  <div class="ph-divider"></div>
-                  <div class="ph-row"><div class="ph-dot ph-dot-w"></div><div class="ph-bar ph-bar-w" style="width:50%;height:2px"></div></div>
-                  <div class="ph-divider"></div>
-                  <div class="ph-row"><div class="ph-dot ph-dot-w"></div><div class="ph-bar ph-bar-w" style="width:55%;height:2px"></div></div>
-                </div>
-                <div class="ph-nav">
-                  <div class="ph-nav-item ph-nav-active"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                </div>
-              </div>
-            </div>
-            <div class="screen-label">Home</div>
-            <div class="screen-sublabel">Dashboard</div>
-          </div>
-
-          <!-- Arrow -->
-          <div class="screen-arrow">
-            <svg width="48" height="12" viewBox="0 0 48 12"><line class="arrow-line" x1="0" y1="6" x2="40" y2="6" stroke="rgba(12,108,206,0.4)" stroke-width="1"/><polygon points="40,2 48,6 40,10" fill="rgba(12,108,206,0.4)"/></svg>
-          </div>
-
-          <!-- 2. ACCOUNTS -->
-          <div class="screen-group">
-            <div class="phone-frame" data-screen="accounts">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-                <div class="ph-status"><span class="ph-time"></span><div class="ph-icons"><span></span><span></span><span></span></div></div>
-                <div class="ph-row" style="margin-bottom:6px"><div class="ph-bar ph-bar-w" style="width:50%;height:4px"></div></div>
-                <div class="ph-card ph-card-blue">
-                  <div class="ph-bar ph-bar-w" style="width:50%;height:2px"></div>
-                  <div class="ph-bar ph-bar-b" style="width:70%;height:5px;margin-top:2px"></div>
-                  <div class="ph-row" style="margin-top:3px"><div class="ph-bar ph-bar-w" style="width:30%;height:2px;opacity:0.4"></div></div>
-                </div>
-                <div class="ph-card ph-card-dark" style="margin-top:4px">
-                  <div class="ph-bar ph-bar-w" style="width:45%;height:2px"></div>
-                  <div class="ph-bar ph-bar-b" style="width:55%;height:5px;margin-top:2px;opacity:0.6"></div>
-                </div>
-                <div class="ph-card ph-card-dark" style="margin-top:4px">
-                  <div class="ph-bar ph-bar-w" style="width:55%;height:2px"></div>
-                  <div class="ph-bar ph-bar-t" style="width:45%;height:5px;margin-top:2px"></div>
-                </div>
-                <div class="ph-card ph-card-dark" style="margin-top:4px">
-                  <div class="ph-bar ph-bar-w" style="width:40%;height:2px"></div>
-                  <div class="ph-bar ph-bar-w" style="width:50%;height:5px;margin-top:2px;opacity:0.3"></div>
-                </div>
-                <div class="ph-nav">
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item ph-nav-active"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                </div>
-              </div>
-            </div>
-            <div class="screen-label">Accounts</div>
-            <div class="screen-sublabel">Balances</div>
-          </div>
-
-          <!-- Arrow -->
-          <div class="screen-arrow">
-            <svg width="48" height="12" viewBox="0 0 48 12"><line class="arrow-line" x1="0" y1="6" x2="40" y2="6" stroke="rgba(12,108,206,0.4)" stroke-width="1"/><polygon points="40,2 48,6 40,10" fill="rgba(12,108,206,0.4)"/></svg>
-          </div>
-
-          <!-- 3. TRANSACTIONS -->
-          <div class="screen-group">
-            <div class="phone-frame" data-screen="transactions">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-                <div class="ph-status"><span class="ph-time"></span><div class="ph-icons"><span></span><span></span><span></span></div></div>
-                <div class="ph-bar ph-bar-w" style="width:40%;height:4px;margin-bottom:4px"></div>
-                <div class="ph-card ph-card-dark" style="padding:5px 6px">
-                  <div class="ph-bar ph-bar-w" style="width:100%;height:8px;border-radius:4px;opacity:0.08"></div>
-                </div>
-                <div style="display:flex;flex-direction:column;gap:3px;margin-top:5px">
-                  <div class="ph-row" style="justify-content:space-between"><div class="ph-row"><div class="ph-circle" style="width:10px;height:10px;background:rgba(12,108,206,0.15)"></div><div style="display:flex;flex-direction:column;gap:1px"><div class="ph-bar ph-bar-w" style="width:45px;height:2px"></div><div class="ph-bar ph-bar-w" style="width:30px;height:2px;opacity:0.3"></div></div></div><div class="ph-bar ph-bar-w" style="width:20px;height:3px"></div></div>
-                  <div class="ph-divider"></div>
-                  <div class="ph-row" style="justify-content:space-between"><div class="ph-row"><div class="ph-circle" style="width:10px;height:10px;background:rgba(12,108,206,0.15)"></div><div style="display:flex;flex-direction:column;gap:1px"><div class="ph-bar ph-bar-w" style="width:50px;height:2px"></div><div class="ph-bar ph-bar-w" style="width:25px;height:2px;opacity:0.3"></div></div></div><div class="ph-bar ph-bar-w" style="width:22px;height:3px"></div></div>
-                  <div class="ph-divider"></div>
-                  <div class="ph-row" style="justify-content:space-between"><div class="ph-row"><div class="ph-circle" style="width:10px;height:10px;background:rgba(255,255,255,0.06)"></div><div style="display:flex;flex-direction:column;gap:1px"><div class="ph-bar ph-bar-w" style="width:40px;height:2px"></div><div class="ph-bar ph-bar-w" style="width:28px;height:2px;opacity:0.3"></div></div></div><div class="ph-bar ph-bar-w" style="width:18px;height:3px"></div></div>
-                  <div class="ph-divider"></div>
-                  <div class="ph-row" style="justify-content:space-between"><div class="ph-row"><div class="ph-circle" style="width:10px;height:10px;background:rgba(12,108,206,0.1)"></div><div style="display:flex;flex-direction:column;gap:1px"><div class="ph-bar ph-bar-w" style="width:48px;height:2px"></div><div class="ph-bar ph-bar-w" style="width:32px;height:2px;opacity:0.3"></div></div></div><div class="ph-bar ph-bar-w" style="width:24px;height:3px"></div></div>
-                  <div class="ph-divider"></div>
-                  <div class="ph-row" style="justify-content:space-between"><div class="ph-row"><div class="ph-circle" style="width:10px;height:10px;background:rgba(255,255,255,0.06)"></div><div style="display:flex;flex-direction:column;gap:1px"><div class="ph-bar ph-bar-w" style="width:42px;height:2px"></div><div class="ph-bar ph-bar-w" style="width:26px;height:2px;opacity:0.3"></div></div></div><div class="ph-bar ph-bar-w" style="width:20px;height:3px"></div></div>
-                </div>
-                <div class="ph-nav">
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item ph-nav-active"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                </div>
-              </div>
-            </div>
-            <div class="screen-label">Transactions</div>
-            <div class="screen-sublabel">History</div>
-          </div>
-
-          <!-- Arrow -->
-          <div class="screen-arrow">
-            <svg width="48" height="12" viewBox="0 0 48 12"><line class="arrow-line" x1="0" y1="6" x2="40" y2="6" stroke="rgba(12,108,206,0.4)" stroke-width="1"/><polygon points="40,2 48,6 40,10" fill="rgba(12,108,206,0.4)"/></svg>
-          </div>
-
-          <!-- 4. TRANSFER -->
-          <div class="screen-group">
-            <div class="phone-frame" data-screen="transfer">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-                <div class="ph-status"><span class="ph-time"></span><div class="ph-icons"><span></span><span></span><span></span></div></div>
-                <div class="ph-bar ph-bar-w" style="width:35%;height:4px;margin-bottom:8px"></div>
-                <div class="ph-card ph-card-dark" style="margin-bottom:5px">
-                  <div class="ph-bar ph-bar-w" style="width:25%;height:2px;opacity:0.4"></div>
-                  <div class="ph-card ph-card-blue" style="margin-top:3px;padding:4px 5px">
-                    <div class="ph-bar ph-bar-w" style="width:55%;height:2px"></div>
-                  </div>
-                </div>
-                <div class="ph-card ph-card-dark" style="margin-bottom:5px">
-                  <div class="ph-bar ph-bar-w" style="width:20%;height:2px;opacity:0.4"></div>
-                  <div class="ph-card ph-card-dark" style="margin-top:3px;padding:4px 5px">
-                    <div class="ph-bar ph-bar-w" style="width:45%;height:2px"></div>
-                  </div>
-                </div>
-                <div class="ph-card ph-card-dark">
-                  <div class="ph-bar ph-bar-w" style="width:28%;height:2px;opacity:0.4"></div>
-                  <div class="ph-bar ph-bar-b" style="width:40%;height:8px;margin-top:3px"></div>
-                </div>
-                <div class="ph-btn" style="background:rgba(12,108,206,0.5);margin-top:10px"></div>
-                <div class="ph-nav">
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item ph-nav-active"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                </div>
-              </div>
-            </div>
-            <div class="screen-label">Transfer</div>
-            <div class="screen-sublabel">Payments</div>
-          </div>
-
-          <!-- Arrow -->
-          <div class="screen-arrow">
-            <svg width="48" height="12" viewBox="0 0 48 12"><line class="arrow-line" x1="0" y1="6" x2="40" y2="6" stroke="rgba(12,108,206,0.4)" stroke-width="1"/><polygon points="40,2 48,6 40,10" fill="rgba(12,108,206,0.4)"/></svg>
-          </div>
-
-          <!-- 5. CARDS -->
-          <div class="screen-group">
-            <div class="phone-frame" data-screen="cards">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-                <div class="ph-status"><span class="ph-time"></span><div class="ph-icons"><span></span><span></span><span></span></div></div>
-                <div class="ph-bar ph-bar-w" style="width:30%;height:4px;margin-bottom:6px"></div>
-                <div class="ph-card ph-card-blue" style="padding:10px 8px;min-height:52px">
-                  <div class="ph-bar ph-bar-w" style="width:30%;height:2px;opacity:0.5"></div>
-                  <div style="display:flex;gap:3px;margin-top:auto">
-                    <div class="ph-dot ph-dot-b"></div><div class="ph-dot ph-dot-b"></div><div class="ph-dot ph-dot-b"></div><div class="ph-dot ph-dot-b"></div>
-                    <div style="width:3px"></div>
-                    <div class="ph-dot ph-dot-b"></div><div class="ph-dot ph-dot-b"></div><div class="ph-dot ph-dot-b"></div><div class="ph-dot ph-dot-b"></div>
-                  </div>
-                  <div class="ph-bar ph-bar-w" style="width:45%;height:2px;margin-top:6px;opacity:0.4"></div>
-                </div>
-                <div class="ph-row" style="margin-top:8px;gap:6px;justify-content:center">
-                  <div class="ph-rect ph-card-dark" style="width:32px;height:24px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px"><div class="ph-dot ph-dot-b" style="width:6px;height:6px"></div><div class="ph-bar ph-bar-w" style="width:18px;height:1.5px"></div></div>
-                  <div class="ph-rect ph-card-dark" style="width:32px;height:24px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px"><div class="ph-dot ph-dot-t" style="width:6px;height:6px"></div><div class="ph-bar ph-bar-w" style="width:18px;height:1.5px"></div></div>
-                  <div class="ph-rect ph-card-dark" style="width:32px;height:24px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px"><div class="ph-dot ph-dot-w" style="width:6px;height:6px"></div><div class="ph-bar ph-bar-w" style="width:18px;height:1.5px"></div></div>
-                </div>
-                <div class="ph-card ph-card-dark" style="margin-top:8px">
-                  <div class="ph-row"><div class="ph-dot ph-dot-w"></div><div class="ph-bar ph-bar-w" style="width:60%;height:2px"></div></div>
-                  <div class="ph-divider"></div>
-                  <div class="ph-row"><div class="ph-dot ph-dot-w"></div><div class="ph-bar ph-bar-w" style="width:50%;height:2px"></div></div>
-                </div>
-                <div class="ph-nav">
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item ph-nav-active"></div>
-                  <div class="ph-nav-item"></div>
-                </div>
-              </div>
-            </div>
-            <div class="screen-label">Cards</div>
-            <div class="screen-sublabel">Manage</div>
-          </div>
-
-          <!-- Arrow -->
-          <div class="screen-arrow">
-            <svg width="48" height="12" viewBox="0 0 48 12"><line class="arrow-line" x1="0" y1="6" x2="40" y2="6" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><polygon points="40,2 48,6 40,10" fill="rgba(255,255,255,0.1)"/></svg>
-          </div>
-
-          <!-- 6. SETTINGS -->
-          <div class="screen-group">
-            <div class="phone-frame" data-screen="settings">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-                <div class="ph-status"><span class="ph-time"></span><div class="ph-icons"><span></span><span></span><span></span></div></div>
-                <div class="ph-bar ph-bar-w" style="width:35%;height:4px;margin-bottom:6px"></div>
-                <div class="ph-row" style="gap:8px;margin-bottom:8px">
-                  <div class="ph-circle" style="background:rgba(12,108,206,0.12);width:22px;height:22px"></div>
-                  <div style="display:flex;flex-direction:column;gap:2px"><div class="ph-bar ph-bar-w" style="width:50px;height:3px"></div><div class="ph-bar ph-bar-w" style="width:35px;height:2px;opacity:0.3"></div></div>
-                </div>
-                <div class="ph-divider" style="margin-bottom:5px"></div>
-                <div style="display:flex;flex-direction:column;gap:5px">
-                  <div class="ph-row"><div class="ph-dot ph-dot-w" style="width:6px;height:6px;border-radius:1px"></div><div class="ph-bar ph-bar-w" style="width:55%;height:2px"></div></div>
-                  <div class="ph-row"><div class="ph-dot ph-dot-w" style="width:6px;height:6px;border-radius:1px"></div><div class="ph-bar ph-bar-w" style="width:50%;height:2px"></div></div>
-                  <div class="ph-row"><div class="ph-dot ph-dot-w" style="width:6px;height:6px;border-radius:1px"></div><div class="ph-bar ph-bar-w" style="width:60%;height:2px"></div></div>
-                  <div class="ph-divider"></div>
-                  <div class="ph-row"><div class="ph-dot ph-dot-w" style="width:6px;height:6px;border-radius:1px"></div><div class="ph-bar ph-bar-w" style="width:45%;height:2px"></div></div>
-                  <div class="ph-row"><div class="ph-dot ph-dot-w" style="width:6px;height:6px;border-radius:1px"></div><div class="ph-bar ph-bar-w" style="width:55%;height:2px"></div></div>
-                  <div class="ph-divider"></div>
-                  <div class="ph-row"><div class="ph-dot ph-dot-w" style="width:6px;height:6px;border-radius:1px"></div><div class="ph-bar ph-bar-w" style="width:50%;height:2px"></div></div>
-                </div>
-                <div class="ph-nav">
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item"></div>
-                  <div class="ph-nav-item ph-nav-active"></div>
-                </div>
-              </div>
-            </div>
-            <div class="screen-label">Settings</div>
-            <div class="screen-sublabel">Profile</div>
-          </div>
-
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1512,51 +1158,6 @@
         heroBg.style.transform = `translateY(${window.scrollY * 0.1}px)`;
     }, { passive: true });
 
-    // ─── PHONE SCREEN INTERACTIONS ─────────────────────────────
-    (function() {
-      const frames = document.querySelectorAll('.phone-frame');
-      const groups = document.querySelectorAll('.screen-group');
-      const arrows = document.querySelectorAll('.screen-arrow');
-
-      frames.forEach(frame => {
-        frame.addEventListener('click', () => {
-          frames.forEach(f => f.classList.remove('active'));
-          frame.classList.add('active');
-
-          frames.forEach(f => {
-            if (f !== frame) {
-              f.style.opacity = '0.35';
-              f.style.transform = 'scale(0.96)';
-            } else {
-              f.style.opacity = '';
-              f.style.transform = 'translateY(-6px) scale(1.03)';
-            }
-          });
-
-          setTimeout(() => {
-            frames.forEach(f => { f.style.opacity = ''; f.style.transform = ''; });
-          }, 800);
-        });
-      });
-
-      let screensAnimated = false;
-      const screensObs = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting && !screensAnimated) {
-          screensAnimated = true;
-          const items = document.querySelectorAll('#screens-row > *');
-          items.forEach((el, i) => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = `opacity 0.6s ${i * 100}ms var(--ease), transform 0.6s ${i * 100}ms var(--ease)`;
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; });
-            });
-          });
-        }
-      }, { threshold: 0.15 });
-      const sc = document.getElementById('screens-canvas');
-      if (sc) screensObs.observe(sc);
-    })();
   </script>
 </body>
 </html>
