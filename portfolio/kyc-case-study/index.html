@@ -47,6 +47,7 @@
     .reveal-delay-3 { transition-delay: 0.35s; }
     .reveal-delay-4 { transition-delay: 0.5s; }
     .reveal-delay-5 { transition-delay: 0.65s; }
+    .reveal-delay-6 { transition-delay: 0.8s; }
 
     /* Layout */
     .container { max-width: calc(100% - 2*var(--pad-x)); margin: 0 var(--pad-x); }
@@ -116,7 +117,7 @@
     .principle-desc { font-size: 0.875rem; font-weight: 400; line-height: 1.55; color: var(--dark-grey); }
 
     /* ── INTRODUCING PATH ─────────────────────────────────────── */
-    #path-intro { background: var(--black); color: var(--white); overflow: hidden; }
+    #path-intro { background: var(--black); color: var(--white); overflow: hidden; position: relative; z-index: 2; }
     #path-intro .label { color: rgba(255,255,255,0.4); }
     #path-intro .path-title { color: var(--white); }
     #path-intro .path-title .highlight { color: var(--yellow); }
@@ -143,6 +144,47 @@
     .decision-emoji { font-size: 2rem; line-height: 1; }
     .decision-title { font-size: 1rem; font-weight: 700; }
     .decision-text { font-size: 0.9rem; font-weight: 400; line-height: 1.55; color: var(--dark-grey); }
+
+    /* ── FINAL SOLUTION ───────────────────────────────────────── */
+    #solution {
+      background: var(--grey-light);
+      padding: 0;
+      position: relative;
+      overflow: visible;
+      z-index: 1;
+    }
+    #solution .section-label.light { color: var(--dark-grey); opacity: 0.6; }
+    #solution .section-heading { color: var(--black); }
+    #solution .solution-card { background: var(--white); border: 1px solid rgba(30,30,30,0.08); }
+    #solution .solution-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+    .solution-left { max-width: 44%; min-width: 0; }
+    .solution-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+    .solution-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 22px 20px;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .solution-card-icon { font-size: 24px; flex-shrink: 0; color: var(--yellow); }
+    .solution-card-text { font-size: 15px; line-height: 1.55; color: var(--black); }
+    .solution-visual-bleed {
+      position: absolute;
+      left: calc(50% + 40px);
+      right: 0;
+      top: -120px;
+      bottom: -120px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .solution-visual-bleed img {
+      width: 100%;
+      height: auto;
+      max-width: none;
+      display: block;
+    }
 
     /* ── HOW PATH WORKS ───────────────────────────────────────── */
     #how-path { background: var(--black); color: var(--white); overflow: visible; }
@@ -335,7 +377,7 @@
     }
 
     /* ── IMPACT ────────────────────────────────────────────────── */
-    #impact { background: var(--yellow); }
+    #impact { background: var(--yellow); position: relative; z-index: 2; }
     #impact .section-title, #impact .label { color: var(--black); }
     #impact .label { opacity: 0.5; }
     .impact-header { margin-bottom: 56px; }
@@ -354,6 +396,53 @@
     .impact-card-emoji { font-size: 2rem; line-height: 1; }
     .impact-card-title { font-size: 1.0625rem; font-weight: 700; line-height: 1.2; color: var(--black); }
     .impact-card-desc { font-size: 0.875rem; font-weight: 400; line-height: 1.55; color: var(--dark-grey); }
+
+    /* ── REFLECTIONS ───────────────────────────────────────────── */
+    #reflections { background: var(--white); }
+    .reflections-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-top: 60px;
+    }
+    .reflection-block h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
+    .reflection-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .reflection-list li {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--dark-grey);
+      padding: 20px 24px;
+      position: relative;
+      background: var(--grey-light);
+      border-radius: 16px;
+      border: 1px solid rgba(30,30,30,0.08);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      cursor: default;
+      transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .reflection-list li:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+    }
+    .reflection-list li::before {
+      content: attr(data-icon);
+      font-size: 1.5rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
 
     /* ── CLOSING ───────────────────────────────────────────────── */
     #closing { background: var(--black); color: var(--white); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
@@ -380,7 +469,11 @@
       .principles-grid { grid-template-columns: 1fr 1fr; }
       .context-stats { grid-template-columns: 1fr; }
       .validation-split { grid-template-columns: 1fr; }
+      .solution-left { max-width: 100%; }
+      .solution-visual-bleed { display: none; }
+      .solution-grid { grid-template-columns: 1fr; }
       .decisions-grid { grid-template-columns: 1fr; }
+      .reflections-grid { grid-template-columns: 1fr; gap: 32px; }
       .challenges-grid { grid-template-columns: 1fr; }
       .role-responsibilities { padding-top: 80px; }
     }
@@ -396,7 +489,7 @@
       .principles-grid { grid-template-columns: 1fr; }
       .role-responsibilities { padding-top: 60px; }
       #chapter-nav { display: none; }
-      .challenge-card, .context-stat, .principle-card, .decision-card, .pillar-card, .impact-card { padding: max(8px, 1.5rem); }
+      .challenge-card, .context-stat, .principle-card, .decision-card, .pillar-card, .impact-card, .solution-card { padding: max(8px, 1.5rem); }
     }
   </style>
 </head>
@@ -410,8 +503,10 @@
     <div class="nav-dot" data-section="strategy"    data-label="Strategy"         onclick="scrollToSection('strategy')"></div>
     <div class="nav-dot" data-section="validation"  data-label="Validation"       onclick="scrollToSection('validation')"></div>
     <div class="nav-dot" data-section="path-intro"  data-label="Path Solution"   onclick="scrollToSection('path-intro')"></div>
+    <div class="nav-dot" data-section="solution"   data-label="Final Solution"   onclick="scrollToSection('solution')"></div>
     <div class="nav-dot" data-section="impact"      data-label="Impact"           onclick="scrollToSection('impact')"></div>
     <div class="nav-dot" data-section="decisions"   data-label="Design Decisions" onclick="scrollToSection('decisions')"></div>
+    <div class="nav-dot" data-section="reflections" data-label="Reflections"     onclick="scrollToSection('reflections')"></div>
     <div class="nav-dot" data-section="closing"     data-label="Close"            onclick="scrollToSection('closing')"></div>
   </nav>
 
@@ -655,6 +750,46 @@
     </div>
   </section>
 
+  <!-- FINAL SOLUTION -->
+  <section id="solution" class="section" data-theme="light">
+    <div class="container section__inner">
+      <div class="solution-left">
+        <p class="label reveal">What shipped</p>
+        <h2 class="section-title reveal reveal-delay-1">Final Solution</h2>
+        <p class="body-text reveal reveal-delay-2" style="margin-top: 20px; max-width: 420px; color: var(--dark-grey);">The shipped product delivered a fully digital KYC experience on Path. Customers could complete verification without a branch visit, with clear progress visibility and the flexibility to pause and resume.</p>
+        <div class="solution-grid">
+          <div class="solution-card reveal reveal-delay-1">
+            <div class="solution-card-icon">🧭</div>
+            <p class="solution-card-text">Guided steps, clear progression</p>
+          </div>
+          <div class="solution-card reveal reveal-delay-2">
+            <div class="solution-card-icon">📊</div>
+            <p class="solution-card-text">Progress visibility throughout</p>
+          </div>
+          <div class="solution-card reveal reveal-delay-3">
+            <div class="solution-card-icon">✅</div>
+            <p class="solution-card-text">Clear confirmation at every step</p>
+          </div>
+          <div class="solution-card reveal reveal-delay-4">
+            <div class="solution-card-icon">⏸️</div>
+            <p class="solution-card-text">Pause and resume, multi-session</p>
+          </div>
+          <div class="solution-card reveal reveal-delay-5">
+            <div class="solution-card-icon">🔄</div>
+            <p class="solution-card-text">Individual and business flows</p>
+          </div>
+          <div class="solution-card reveal reveal-delay-6">
+            <div class="solution-card-icon">💻</div>
+            <p class="solution-card-text">End-to-end digital, no branch visit</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="solution-visual-bleed" aria-hidden="true">
+      <img src="assets/bxo-phoness.png" alt="KYC digital verification screens">
+    </div>
+  </section>
+
   <!-- IMPACT -->
   <section id="impact" class="section" data-theme="yellow">
     <div class="container section__inner">
@@ -714,6 +849,32 @@
           <div class="decision-emoji">👀</div>
           <h3 class="decision-title">Reduced perceived effort in a long journey</h3>
           <p class="decision-text">KYC required many steps. I advocated for a structural approach to reduce perceived effort, turning it into a series of clear steps. This led to the adoption of Path when validation surfaced the need.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFLECTIONS -->
+  <section id="reflections" class="section" data-theme="light">
+    <div class="container section__inner">
+      <p class="label reveal">Looking back</p>
+      <h2 class="section-title reveal reveal-delay-1">Reflections &amp; What's Next</h2>
+      <div class="reflections-grid">
+        <div class="reflection-block reveal reveal-delay-2">
+          <h3>What I Learned</h3>
+          <ul class="reflection-list">
+            <li class="reveal reveal-delay-1" data-icon="🎯">Validation evidence is the best way to influence stakeholders on compliance flows</li>
+            <li class="reveal reveal-delay-2" data-icon="✍️">Language and tone matter as much as structure when customers are anxious</li>
+            <li class="reveal reveal-delay-3" data-icon="🧭">Reusing patterns like Path speeds delivery without sacrificing quality</li>
+          </ul>
+        </div>
+        <div class="reflection-block reveal reveal-delay-3">
+          <h3>What I'd Do Next</h3>
+          <ul class="reflection-list">
+            <li class="reveal reveal-delay-1" data-icon="💬">Clarify why KYC is needed and what happens if it's not completed</li>
+            <li class="reveal reveal-delay-2" data-icon="♿">Run accessibility audits for screen reader and keyboard navigation</li>
+            <li class="reveal reveal-delay-3" data-icon="💡">Extend Path to other compliance flows and document reuse patterns</li>
+          </ul>
         </div>
       </div>
     </div>
